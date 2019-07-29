@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script>
+
+//注册公共的全局组件，省去很多的components:{xxx:XXX}
+Vue.component('my-btn',{
+    template:`
+    <button style="background-color:pink;">乖巧的按钮</button>
+    `
+})
+
+    var MyHeader={
+    template:`<div>
+    我是header组件
+        <my-btn/>
+    </div>`
+    };
+    var MyFooter={
+    template:`<div>
+    我是footer组件
+        <my-btn/>
+    </div>`
+    };
+
+    //入口组件
+    var App={
+        components:{
+            'my-header':MyHeader,
+            'my-footer':MyFooter,
+        },
+        template:`<div>
+            <!-- <my-header></my-header> -->
+            <!-- <my-footer></my-footer> -->
+            <my-header/>
+            <hr/>
+            <my-footer/>
+            <hr/>
+            App入口组件使用全局组件如下
+            <my-btn/>
+        </div>`
+    }
+    new Vue({
+        el:'#app',
+        components:{
+            app:App
+        },
+        template:'<app/>'
+    });
+</script>
+</html>

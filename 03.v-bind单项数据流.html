@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind</title>
+</head>
+<body>
+    <div id="app"></div>
+</body>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    //v-bind绑定属性值，即给属性赋值
+    //v-on绑定事件
+
+    //<div v-bind:原属性值="变量"></div>
+    //<div :属性名="变量"></div>
+
+    //v-on:事件名="表达式或函数名"
+    //@事件名="表达式"
+        new Vue({
+        el:'#app',
+        template:`
+        <!-- 必须一个根节点 -->
+        <div>
+            <input type="text" v-bind:value="myValue" :file=" 'xxx' " />
+            <hr/>
+            <button v-on:click="myValue='喵喵喵'">点我改变myValue</button>
+            <button @click="myValue='喵喵喵'">简写改变myValue</button><!-- 这里click前面不能用':',冒号用于绑定属性,@是绑定事件 -->
+            <!-- 点击按钮，改变了vue内部的变量 -->
+            <!-- 这是一个将vue当中的数据同步到页面的过程 -->
+            <!-- vue察觉到页面中使用的变量更改了，所以重新渲染视图的更改部分 -->
+        </div>
+        `,
+        data:function(){
+            return{
+                myValue:'咩咩咩'//value值是根据vue内部的变量
+            }
+        }
+    });
+</script>
+</html>

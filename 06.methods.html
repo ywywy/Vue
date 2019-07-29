@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+</html>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        template: `
+        <!-- 必须一个根节点 -->
+        <div>
+            <h1 v-show="isShow">1</h1>
+            <h1 v-show="isShow">2</h1>
+            <h1 v-show="isShow">3</h1>
+            <h1 v-if="isShow">4</h1>
+
+            <button @click="changeIsShow">点我更酷</button>
+        </div>
+        `,
+        data: function () {
+            return {
+                isShow:true
+            }
+        },
+        //在根属性中声明methods属性
+        methods:{
+            //key是函数名，value是函数体
+            changeIsShow:function(e){
+                //this 就是data函数return出去的对象
+                //vue帮我们处理的this指向，不是事件对象了
+                console.log(e.target);
+                console.log(this);
+                this.isShow =!this.isShow;
+            }
+        }
+    });
+    //第28行 template里写模板，毕竟空间有限,所以最好是写入口，入口里有模板A,模板B,模板C...入口与其内含的模板可称为组件
+    //组件,可以理解为组合起来的部件，包含组件的就是父组件，被包含的就是子组件，父组件使用子组件
+    //具体看07.组件化.html
+</script>

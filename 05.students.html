@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .a{
+            background-color:pink;
+        }
+        .b{
+            background-color:cornflowerblue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+</html>
+<script type="text/javascript" src="./node_modules/vue/dist/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        template: `
+        <!-- 必须一个根节点 -->
+        <div>
+            <ul>
+                <li v-for="item in stus" :class="item.myClass"><!-- item其实是一个临时变量，可随意命名 -->
+                    {{item.name}}
+                </li>
+            </ul>
+            <hr/>
+            <ul>
+                <li v-for="(val,key,index) in stus2">
+                    val:{{val}}
+                    key:{{key}}
+                    index:{{index}}
+                </li>
+            </ul>
+        </div>
+        `,
+        data: function () {
+            return {
+                stus:[{name:'张三',myClass:'a'},{name:'李四',myClass:'b'},{name:'王五',myClass:'a'}],
+                stus2:{'A':'张三','B':'李四','C':'王五'},
+            }
+        }
+    });
+    //补充知识点：
+    //1.v-for的使用中，除了item属性，还有一些辅助属性
+    //stus:数组:(item,index) 奇偶数的不同样式 :class="index%2==0?'pink':'cornflowerblue'" 取余 余数等于0样式为pink  不等于0为cornflowerblue
+    //stus:对象(value,key,index) in stus
+</script>
